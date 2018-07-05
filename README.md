@@ -130,6 +130,7 @@ balabala说了一堆，有的同学估计都没耐心看了，说你敢不敢来
 ```  
   
 假设场景:
+
 ```text
 假设有个程序员大神叫宙斯（Zeus),这个大神有2个儿子：阿波罗（Apollo）和阿瑞斯（Ares),悲催的是阿波罗（Apollo）是亲生的，  
   
@@ -140,7 +141,9 @@ balabala说了一堆，有的同学估计都没耐心看了，说你敢不敢来
   
 先来看看他爹Zeus有多少钱，是不是暴发户？
 ```  
+
 code:
+
 ```java
 package base;
 
@@ -152,9 +155,11 @@ public class Zeus {
     }
 }
 ```
+
 ```text
 尼玛钱都用来养这2个熊孩子和还房贷了，就剩下1000块，看看Apollo到底是不是亲生的？
 ```
+
 ```java
 package base;
 
@@ -164,11 +169,13 @@ public class Apollo extends Zeus{
     }
 }
 ```
+
 ```text
 编译通过了，果然是亲生的，嗯嗯，肯定做过dna验证了。再来看看Ares这熊孩子，
   
 Ares这熊孩子鸡贼的很，撒谎跟他爹Zeus说是Apollo想要钱买芭比娃娃,看看啥结果？
 ```
+
 ```java
 package extend;
 
@@ -181,9 +188,11 @@ public class Ares extends Zeus {
     }
 }
 ```
+
 ```text
 编译失败了，被他爹识破了。还是实话实说吧。
 ```
+
 ```java
 package extend;
 
@@ -196,11 +205,13 @@ public class Ares extends Zeus {
     }
 }
 ```
+
 ```text
-编译通过了,看来这爹还行，对2个儿子一视同仁。Ares撒对这慌被Apollo知道了，Apollo心里不爽，
+编译通过了,看来这爹还行，对2个儿子一视同仁。Ares撒的这慌被Apollo知道了，Apollo心里不爽，
   
 也想以Ares的名义撒一次慌,说Ares想买咸蛋超人。
 ```
+
 ```java
 package base;
 
@@ -212,14 +223,36 @@ public class Apollo extends Zeus{
     }
 }
 ```
+
 ```text
 编译通过了,竟然把他爹蒙住了。哈哈～～
+  
+事又来了，宙斯（Zeus)的兄弟波塞冬（Poseidon）好吃懒做，平时给学校门口小卖部赊帐买辣条，
+  
+赊了200块，老板娘逼债，没办法只能找宙斯（Zeus)要钱还债。（他们家破事真多，我都懒得管～～）
 ```
+
+```java
+package base;
+
+public class Poseidon {
+    public static void main(String[] args) {
+        new Apollo().giveMoney(100);
+    }
+}
+```
+```text
+编译通过了，没办法毕竟还是亲兄弟，Zeus泪奔～～～
+```
+
 总结：
 ```text
-
+ 1.基类的protected成员是包内可见的，并且对子类可见。
+  
+ 2.若子类与基类不在同一包中，那么在子类中，子类实例可以访问其从基类继承而来的protected方法，而不能访问基类实例的protected方法。
 ```
 
+![java访问权限](img/java_access.png)
 
 
 
