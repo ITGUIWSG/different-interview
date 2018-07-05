@@ -245,7 +245,8 @@ public class Poseidon {
 编译通过了，没办法毕竟还是亲兄弟，Zeus泪奔～～～
 ```
 
-总结：
+总结:
+
 ```text
  1.基类的protected成员是包内可见的，并且对子类可见。
   
@@ -254,6 +255,13 @@ public class Poseidon {
 
 ![java访问权限](img/java_access.png)
 
+吐槽:
+
+```text
+很多介绍Java语言的书籍(包括《Java编程思想》)都对protected介绍的比较的简单，基本都是一句话，就是:被protected修饰的成员对于本包和
+  
+其子类可见。这种说法有点太过含糊，常常会对大家造成误解。本人也被误导了很多年，哈哈，泪奔～～～
+```
 
 
 
