@@ -112,17 +112,17 @@ Java中的访问权限控制的等级，按照权限从大到小依次为:
   
 那么为什么设计个public和private就完了呢，实际业务中我们会发现，我们想要更灵活的访问权限，于是就有了包访问权限和protected。
   
-这里需要注意包访问权限，jdk1.8之前可以表示为default,但是jdk1.8以后接口引入了default关键字，也有表示为friendly的，实际就是个代号，
+这里需要注意包访问权限，jdk1.8之前可以表示为default,但是jdk1.8以后接口引入了default关键字，也有表示为friendly的，  
   
-在修饰的对象前什么都不加就是包访问权限了。    
+实际就是个代号，在修饰的对象前什么都不加就是包访问权限了。    
   
 那protected访问权限呢？    
   
 新类（称之子类或派生类）通过继承可以复用一个现有类（称之父类或基类），然后扩展基类的成员、方法。
   
-有时，基类的创建者会希望某个特定成员，将它的访问权限赋予派生类而不是所有类。public无法做到这一点，为此，引入了protected来完成这一工作。  
+有时，基类的创建者会希望某个特定成员，将它的访问权限赋予派生类而不是所有类。public无法做到这一点，为此，  
   
-protected也提供包访问权限，也就是说，派生类以及相同包内的其他类都可以访问protected成员或方法。   
+引入了protected来完成这一工作。 protected也提供包访问权限，也就是说，派生类以及相同包内的其他类都可以访问protected成员或方法。   
   
   
 balabala说了一堆，有的同学估计都没耐心看了，说你敢不敢来点代码，no code no bb。下面咱就来个代码，往下看code来了。
@@ -164,7 +164,9 @@ public class Apollo extends Zeus{
 }
 ```
 ```text
-编译通过了，果然是亲生的，嗯嗯，肯定做过dna验证了。再来看看Ares这熊孩子，啥情况？
+编译通过了，果然是亲生的，嗯嗯，肯定做过dna验证了。再来看看Ares这熊孩子，
+  
+Ares这熊孩子鸡贼的很，撒谎跟他爹Zeus说是Apollo想要钱买芭比娃娃,看看啥结果？
 ```
 ```java
 package extend;
@@ -179,7 +181,7 @@ public class Ares extends Zeus {
 }
 ```
 ```text
-编译失败了，Ares这熊孩子鸡贼的很，撒谎跟他爹Zeus说是Apollo想要钱买芭比娃娃，被他爹识破了。还是实话实说吧。
+编译失败了，被他爹识破了。还是实话实说吧。
 ```
 ```java
 package extend;
@@ -194,7 +196,9 @@ public class Ares extends Zeus {
 }
 ```
 ```text
-编译通过了,看来这爹还行，对2个儿子一视同仁。Ares撒对这慌被Apollo知道了，Apollo心里不爽，也想以Ares的名义撒一次慌,说Ares想买咸蛋超人。
+编译通过了,看来这爹还行，对2个儿子一视同仁。Ares撒对这慌被Apollo知道了，Apollo心里不爽，
+  
+也想以Ares的名义撒一次慌,说Ares想买咸蛋超人。
 ```
 ```java
 package base;
