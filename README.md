@@ -76,7 +76,153 @@
   
   我们使用充电宝了，那就是使用充电宝给手机充电。
    
+```  
+
+* 谈谈java控制权限  
+  
+```text
+java中为什么要设计访问权限控制机制:  
+  
+  1.为了使用户不要触碰那些他们不该触碰的部分，这些部分对于类内部的操作时必要的，但是它并不属于客户端程序员所需接口的一部分。  
+    
+  2.为了让类库设计者可用更改类的内部工作方式，而不必担心会对用户造成重大影响。  
+  
+  
+Java中的访问权限控制的等级，按照权限从大到小依次为:
+  
+  public -> protected -> 包访问权限（没有权限修饰词）-> private
+  
+  public: 所有类都可以访问。 
+  
+  protected: 继承访问权限。
+    
+  private: 只有本类可以访问。  
+    
+  包访问权限:有时也表示为friendly,在同一个包中可以访问(如果不提供任何访问权限修饰词，则意味着它是包访问权限)。
+```  
+
+分析: 
+
+```text
+假如你是jdk的设计开发者，你为什么要设计访问权限呢？归根到底无非几点：
+  
+  1.我有些实现细节要隐藏起来,你调用的时候不用关心。
+    
+  2.我有些东西是我程序内部运行需要的，你不能任意改动，改动会出现不能运行等问题。
+  
+那么为什么设计个public和private就完了呢，实际业务中我们会发现，我们想要更灵活的访问权限，于是就有了包访问权限和protected。
+  
+这里需要注意包访问权限，jdk1.8之前可以表示为default,但是jdk1.8以后接口引入了default关键字，也有表示为friendly的，实际就是个代号，
+  
+在修饰的对象前什么都不加就是包访问权限了。    
+  
+那protected访问权限呢？    
+  
+新类（称之子类或派生类）通过继承可以复用一个现有类（称之父类或基类），然后扩展基类的成员、方法。
+  
+有时，基类的创建者会希望某个特定成员，将它的访问权限赋予派生类而不是所有类。public无法做到这一点，为此，引入了protected来完成这一工作。  
+  
+protected也提供包访问权限，也就是说，派生类以及相同包内的其他类都可以访问protected成员或方法。   
+  
+  
+balabala说了一堆，有的同学估计都没耐心看了，说你敢不敢来点代码，no code no bb。下面咱就来个代码，往下看code来了。
+
+```  
+  
+假设场景:
+```text
+假设有个程序员大神叫宙斯（Zeus),这个大神有2个儿子：阿波罗（Apollo）和阿瑞斯（Ares),悲催的是阿波罗（Apollo）是亲生的，  
+  
+阿瑞斯（Ares)是垃圾堆里捡的，这2兄弟都想找他daddy要100块钱买咸蛋超人，现在就看他daddy到底会不会偏袒哪个儿子吧  
+   
+（本故事纯属虚构，如有雷同纯属巧合，不喜勿喷）。  
+  
+先来看看他爹Zeus有多少钱，是不是暴发户
+```  
+code:
+```java
+package base;
+
+public class Zeus {
+    private int money = 1000;
+
+    protected void giveMoney(int m) {
+        this.money = this.money - m;
+    }
+}
 ```
+```text
+尼玛钱都用来养这2个熊孩子和还房贷了，就剩下1000块；看看Apollo到底是不是亲生的？
+```
+```java
+package base;
+
+public class Apollo extends Zeus{
+    public static void main(String[] args) {
+        new Apollo().giveMoney(100);
+    }
+}
+```
+```text
+编译通过了，果然是亲生的，嗯嗯，肯定做过dna验证了。再来看看Ares这熊孩子，啥情况？
+```
+```java
+package extend;
+
+import base.Apollo;
+import base.Zeus;
+
+public class Ares extends Zeus {
+    public static void main(String[] args) {
+        new Apollo().giveMoney(100);  //compile fail
+    }
+}
+```
+```text
+编译失败了，Ares这熊孩子鸡贼的很，撒谎跟他爹Zeus说是Apollo想要钱买芭比娃娃，被他爹识破了。还是实话实说吧。
+```
+```java
+package extend;
+
+import base.Apollo;
+import base.Zeus;
+
+public class Ares extends Zeus {
+    public static void main(String[] args) {
+        new Ares().giveMoney(100);  
+    }
+}
+```
+```text
+编译通过了,看来这爹还行，对2个儿子一视同仁。Ares撒对这慌被Apollo知道了，Apollo心里不爽，也想以Ares的名义撒一次慌,说Ares想买咸蛋超人。
+```
+```java
+package base;
+
+import extend.Ares;
+
+public class Apollo extends Zeus{
+    public static void main(String[] args) {
+        new Ares().giveMoney(100);
+    }
+}
+```
+```text
+编译通过了,竟然把他爹蒙住了。哈哈～～
+```
+总结：
+```text
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
