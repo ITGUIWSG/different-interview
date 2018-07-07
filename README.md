@@ -338,7 +338,7 @@ public class Poseidon {
   
 String不属于基本数据类型，他是设计在jdk中的，继承Object类，并且重写了equals方法。
   
-接口由于需要被继承实现，所以也不可能继承Object类。实际接口继承了Object接口，可能很多东西没听过还有Object接口，这里也不做具体阐述，
+接口由于需要被继承实现，所以也不可能继承Object类。实际接口继承了Object接口，可能很多同学没听过还有Object接口，这里也不做具体阐述，
   
 有兴趣的同学可以自己研究（org.omg.CORBA包下的Object接口）。
   
