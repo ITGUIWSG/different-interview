@@ -9,7 +9,7 @@
   * [面向对象的特征有哪些方面](#面向对象的特征有哪些方面)
   * [谈谈java控制权限](#谈谈java控制权限)
   * [&和&&的区别](#和的区别)
-  * [java所有类都继承Object类吗](#java所有类都继承Object类吗)
+  * [java所有类都继承Object类吗](#java所有类都继承object类吗)
   * [==和equals方法有什么区别](#和equals方法有什么区别)
 * [java高级](#java高级)
 * [spring框架](#spring框架)  
