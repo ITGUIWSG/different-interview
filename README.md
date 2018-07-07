@@ -305,10 +305,75 @@ public class Poseidon {
 解析:
 
 ```text
-
+& 表达式是boolean类型时表示逻辑与；不是boolean类型时表示位运算；
 ```
 
+* "==" 和 equals 方法究竟有什么区别？  
 
+```text
+== 操作符用来比较两个变量的值是否相等，也就是用于比较变量所对应的内存中所存储的数值是否相同。
+  
+  1.比较基本数据类型时，比较的是基本数据类型的值。
+  
+  2.比较引用数据类型时，比较的是引用数据类型是否指向同一引用。
+  
+equals 操作符一般用来比较两个独立对象的内容是否相同。
+```
+
+解析:
+
+```text
+== 操作符：
+  
+  比较2个整数是否相等时，使用 == 操作符；
+  
+  比较2个对象引用是否指向同一对象时，也就是是否是同一对象，使用 == 操作符，实际比较的是2个对象指向的内存区域首地址,首地址相同，
+  
+  即指向同一块内存区域，即指向同一对象的引用；
+  
+equals 操作符：
+  
+  java所有类默认继承Object类，下面看下Object类的equals方法：
+  
+  public class Object {
+     public boolean equals(Object obj) {
+        return (this == obj);
+     }
+  }
+  
+  可以看出Object的equals默认比较的是两个对象是否相同，由于java所有类默认继承Object类，所以默认比较的是两个对象是否相同。
+  
+  现在在看下String类，重写了默认父类Object类的equals方法:
+    
+   public final class String implements java.io.Serializable, Comparable<String>, CharSequence {
+       public boolean equals(Object anObject) {
+               if (this == anObject) {
+                   return true;
+               }
+               if (anObject instanceof String) {
+                   String anotherString = (String)anObject;
+                   int n = value.length;
+                   if (n == anotherString.value.length) {
+                       char v1[] = value;
+                       char v2[] = anotherString.value;
+                       int i = 0;
+                       while (n-- != 0) {
+                           if (v1[i] != v2[i])
+                               return false;
+                           i++;
+                       }
+                       return true;
+                   }
+               }
+               return false;
+           }
+   }
+   
+   可以看出String类先比较是否为同一对象，然后比较内容是否相同，由于同一个对象的话内容肯定也相同，实际String类比较的是内容。
+     
+   实际应用中我们比较常用的也是重写equals方法，进行对象内容的比较。
+
+```
 
 
 
