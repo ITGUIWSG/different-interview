@@ -470,7 +470,11 @@ java的自动类型提升规则如下:
   byte --> short --> int --> long --> float --> double
            char --> int
 
-  
+```
+
+![java自动类型提升](img/covert.png)
+
+```text
 x(int) + y(double)时候,会自动将x类型由int提升为double,然后将double结果赋值给double类型的z1正常; 赋值给int类型的z2编译器报错。 
   
 再看一下+=的操作:   
