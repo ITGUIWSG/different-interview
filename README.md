@@ -11,6 +11,7 @@
   * [&和&&的区别](#和的区别)
   * [java所有类都继承Object类吗](#java所有类都继承object类吗)
   * [==和equals方法有什么区别](#和equals方法有什么区别)
+  * [+和+=有什么区别](#+和+=有什么区别)
 * [java高级](#java高级)
 * [spring框架](#spring框架)  
 * [jvm](#jvm)  
@@ -445,12 +446,51 @@ equals 操作符：
 
 ```
 
+#### +和+=有什么区别
+```text
+如果赋值类型和结果类型不一致时，并且赋值类型数值范围小于结果类型，+不会对计算结果强制转化类型；+=会隐式自动强制转化类型。
+```
 
+解析：
 
+```java
+public class Test {
+    public static void main(String[] args) {
+        int x = 1;
+        double y = 0.1;
+        double z1 = x + y;
+        int z2 = x + y; //compile fail
+    }
+}
+```
 
+```text
+java的自动类型提升规则如下:
+  
+  byte --> short --> int --> long --> float --> double
+           char --> int
 
+  
+x(int) + y(double)时候,会自动将x类型由int提升为double,然后将double结果赋值给double类型的z1正常; 赋值给int类型的z2编译器报错。 
+  
+再看一下+=的操作:   
+```
 
+```java
+public class Test {
+    public static void main(String[] args) {
+        int x = 1;
+        double y = 0.1;
+        x += y;
+    }
+}
+```
 
+```text
+x(int) + y(double)时候,会自动将x类型由int提升为double,再次赋值给int类型的x时候，编译通过，实际是因为+=隐式的强制进行了类型转换，将
+  
+double类型隐式转化成了int类型，所以能够通过编译。x += y 等价于 x = (int)(x + y);
+```
 
 
 
