@@ -721,7 +721,7 @@ String str1 = "a" + "b";  在内存中堆大致分配过程是怎么样的呢？
 ![内存分配过程4](img/4.png)
 
 ```text
-String str = "a"; String str = str + "b"; 在内存中堆大致分配过程是怎么样的呢？
+String str = "a";  str = str + "b"; 在内存中堆大致分配过程是怎么样的呢？
   
 1.String str : 在栈内存（虚拟机栈）创建String 类型的str。
   
@@ -731,7 +731,7 @@ String str = "a"; String str = str + "b"; 在内存中堆大致分配过程是�
   
   并将栈内存中str指向常量池引用。
   
-4.String str = str + "b":在堆内存创建对象"ab"(str + "b",str最终引用到堆内存中的"a"对象),在堆内存的常量池创建一个常量池引用指向
+4.str = str + "b":在堆内存创建对象"ab"(str + "b",str最终引用到堆内存中的"a"对象),在堆内存的常量池创建一个常量池引用指向
   
   堆内存中创建的"ab"对象(不考虑常量池中已经存在引用的情况),并将栈内存中str指向常量池引用。
 
