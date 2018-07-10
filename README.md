@@ -657,9 +657,13 @@ String str = "a" 在内存中堆大致分配过程是怎么样的呢？
   
 2."a": 在堆内存创建对象"a"。
   
-3.String str = "a":在堆内存的常量池创建一个常量池引用指向堆内存中创建的"a"对象(不考虑常量池中已经存在引用的情况)。
+3.String str = "a":在堆内存的常量池创建一个常量池引用指向堆内存中创建的"a"对象(不考虑常量池中已经存在引用的情况),
   
+  并将栈内存中str指向常量池引用。
   
+```
+
+```text
 StringBuilder stringBuilder = new StringBuilder("a") 在内存中堆大致分配过程是怎么样的呢？
   
 1.StringBuilder stringBuilder: 在栈内存（虚拟机栈）创建StringBuilder 类型的stringBuilder。
@@ -672,8 +676,26 @@ StringBuilder stringBuilder = new StringBuilder("a") 在内存中堆大致分配
   
   
 StringBuffer stringBuffer = new StringBuffer("a")在内存中堆大致分配过程与StringBuilder类似。
+```
+
+```text
+String str = "a"; String str2 = "a"; 在内存中堆大致分配过程是怎么样的呢？
+  
+1.String str : 在栈内存（虚拟机栈）创建String 类型的str。
+  
+2."a": 在堆内存创建对象"a"。
+  
+3.String str = "a": 在堆内存的常量池创建一个常量池引用指向堆内存中创建的"a"对象(不考虑常量池中已经存在引用的情况),
+  
+  并将栈内存中str指向常量池引用。
+  
+4.String str2: 在栈内存（虚拟机栈）创建String 类型的str2。
+  
+5.String str2 = "a": 直接将栈内存（虚拟机栈）指向常量池引用（由于常量池中已经存在引用情况）。
 
 ```
+
+
 
 ### java高级  
 
