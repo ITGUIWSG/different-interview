@@ -663,6 +663,8 @@ String str = "a" 在内存中堆大致分配过程是怎么样的呢？
   
 ```
 
+![内存分配过程1](img/1.png)
+
 ```text
 StringBuilder stringBuilder = new StringBuilder("a") 在内存中堆大致分配过程是怎么样的呢？
   
@@ -677,6 +679,8 @@ StringBuilder stringBuilder = new StringBuilder("a") 在内存中堆大致分配
   
 StringBuffer stringBuffer = new StringBuffer("a")在内存中堆大致分配过程与StringBuilder类似。
 ```
+
+![内存分配过程2](img/2.png)
 
 ```text
 String str = "a"; String str2 = "a"; 在内存中堆大致分配过程是怎么样的呢？
