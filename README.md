@@ -648,7 +648,9 @@ synchronized 的成员函数中至多只有一个处于可执行状态（因为�
 ```text
 分析之前先看下jvm内存结构,如下图(基于jdk1.8):
 ```
+
 ![jvm内存模型](img/jmm.jpg)
+
 
 ```text
 String str = "a" 在内存中堆大致分配过程是怎么样的呢？
@@ -661,88 +663,6 @@ String str = "a" 在内存中堆大致分配过程是怎么样的呢？
   
   并将栈内存中str指向常量池引用。
   
-```
-
-![内存分配过程1](img/1.png)
-
-```text
-StringBuilder stringBuilder = new StringBuilder("a") 在内存中堆大致分配过程是怎么样的呢？
-  
-1.StringBuilder stringBuilder: 在栈内存（虚拟机栈）创建StringBuilder 类型的stringBuilder。
-  
-2."a": 在堆内存创建对象"a"(不考虑已经存在的情况)。
-  
-3. new StringBuilder("a"): 在堆内存继续创建一个对象指向堆内存对象"a"。
-  
-4.StringBuilder stringBuilder = new StringBuilder("a"):将栈内存中的stringBuilder的引用指向堆内存对象new StringBuilder("a")。
-  
-  
-StringBuffer stringBuffer = new StringBuffer("a")在内存中堆大致分配过程与StringBuilder类似。
-```
-
-![内存分配过程2](img/2.png)
-
-```text
-String str1 = "a"; String str2 = "a"; 在内存中堆大致分配过程是怎么样的呢？
-  
-1.String str1 : 在栈内存（虚拟机栈）创建String 类型的str1。
-  
-2."a": 在堆内存创建对象"a"。
-  
-3.String str1 = "a": 在堆内存的常量池创建一个常量池引用指向堆内存中创建的"a"对象(不考虑常量池中已经存在引用的情况),
-  
-  并将栈内存中str1指向常量池引用。
-  
-4.String str2: 在栈内存（虚拟机栈）创建String 类型的str2。
-  
-5.String str2 = "a": 直接将栈内存（虚拟机栈）指向常量池引用（由于常量池中已经存在引用情况）。
-
-```
-
-![内存分配过程3](img/3.png)
-
-```text
-String str1 = "a" + "b";  在内存中堆大致分配过程是怎么样的呢？
-  
-1.String str1 : 在栈内存（虚拟机栈）创建String 类型的str1。
-  
-2."a": 在堆内存创建对象"a"。
-  
-3."b": 在堆内存创建对象"b"。
-  
-3."a" + "b": 在堆内存创建对象"ab"。
-  
-4.String str1 = "a" + "b": 在堆内存的常量池创建一个常量池引用指向堆内存中创建的"ab"对象(不考虑常量池中已经存在引用的情况),
-                            
-  并将栈内存中str1指向常量池引用。
-  
-```
-
-![内存分配过程4](img/4.png)
-
-```text
-String str = "a";  str = str + "b"; 在内存中堆大致分配过程是怎么样的呢？
-  
-1.String str : 在栈内存（虚拟机栈）创建String 类型的str。
-  
-2."a": 在堆内存创建对象"a"。
-  
-3.String str = "a": 在堆内存的常量池创建一个常量池引用指向堆内存中创建的"a"对象(不考虑常量池中已经存在引用的情况),
-  
-  并将栈内存中str指向常量池引用。
-  
-4.str = str + "b":在堆内存创建对象"ab"(str + "b",str最终引用到堆内存中的"a"对象),在堆内存的常量池创建一个常量池引用指向
-  
-  堆内存中创建的"ab"对象(不考虑常量池中已经存在引用的情况),并将栈内存中str指向常量池引用。
-
-```
-
-![内存分配过程5](img/5.png)
-
-```text
-可以看出String一旦创建值无法改变（大家可以String源代码，被final关键字修饰），表面看来的字符串值的转变，实际上是通过对象的新建
-  
-和内存地址重新指向实现，在这个过程中不断创建新的对象，并将旧的对象回收，所以这过程很慢。
 ```
 
 
